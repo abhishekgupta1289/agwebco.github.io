@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Under Development</title>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFF5E1; /* Light pastel yellow */
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: #FFDAB9; /* Peach */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        h1 {
+            color: #B8860B; /* Dark goldenrod */
+            margin-bottom: 20px;
+        }
+        p {
+            color: #8B4513; /* Saddle brown */
+        }
+        #countdown {
+            font-size: 2.5em;
+            margin: 30px 0;
+            color: #FF8C00; /* Dark orange */
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #FFD700; /* Gold */
+            border-top: 5px solid #FFA500; /* Orange */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Website Under Development</h1>
+        <p>We're working hard to bring you something amazing!</p>
+        <div class="loader"></div>
+        <p>agwebco will be:</p>
+        <div id="countdown">00:00:00</div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const launchDate = new Date("2023-12-31T23:59:59").getTime();
+            const now = new Date().getTime();
+            const timeLeft = launchDate - now;
+
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("countdown").innerHTML = "available soon!";
+            }
+        }
+
+        const countdownTimer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
